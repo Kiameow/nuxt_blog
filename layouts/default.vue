@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main class="h-screen">
+  <main>
     <slot />
   </main>
   <footer>
