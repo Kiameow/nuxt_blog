@@ -1,23 +1,16 @@
 <script setup lang="ts">
+import {
+  aboutMeData,
+  contactData,
+  introductionData,
+  ownerData,
+} from "~/data/data";
 import type { LinkItem } from "~/types";
-const blogger = "Kiameow";
-const introduction: string = "web developer / frontend developer";
+const blogger = ownerData.name;
+const introduction = introductionData;
+const aboutMe = aboutMeData.description;
 
-interface ContactItem extends LinkItem {
-  icon: string;
-}
-const contacts: ContactItem[] = [
-  {
-    text: "Kiameow",
-    link: "https://github.com/Kiameow",
-    icon: "grommet-icons:github",
-  },
-  {
-    text: "zhang_lumi@foxmail",
-    link: "mailto:zhang_lumi@foxmail.com",
-    icon: "grommet-icons:mail",
-  },
-];
+const contacts = contactData.contacts;
 </script>
 
 <template>
@@ -47,13 +40,24 @@ const contacts: ContactItem[] = [
       <Button class="rounded-full">Read more</Button>
     </div>
     <div class="h-screen w-2/3 grid grid-rows-12 grid-cols-2 gap-x-8 gap-y-8 mr-20">
-      <div class="border row-start-1 row-end-6 col-start-1 col-end-2 rounded-lg"></div> 
-      <div class="border row-start-6 row-end-11 col-start-1 col-end-2 rounded-lg"></div> 
-      <div class="border row-start-11 row-end-13 col-start-1 col-end-2 rounded-lg"></div> 
-      <div class="border row-start-1 row-end-3 col-start-2 col-end-3 rounded-lg"></div> 
-      <div class="border row-start-3 row-end-8 col-start-2 col-end-3 rounded-lg"></div> 
-      <div class="border row-start-8 row-end-13 col-start-2 col-end-3 rounded-lg"></div> 
+      <div class="border row-start-1 row-end-6 col-start-1 col-end-2 rounded-lg"></div>
+      <div class="border row-start-6 row-end-11 col-start-1 col-end-2 rounded-lg"></div>
+      <div class="border row-start-11 row-end-13 col-start-1 col-end-2 rounded-lg"></div>
+      <div class="border row-start-1 row-end-3 col-start-2 col-end-3 rounded-lg"></div>
+      <div class="border row-start-3 row-end-8 col-start-2 col-end-3 rounded-lg"></div>
+      <div class="border row-start-8 row-end-13 col-start-2 col-end-3 rounded-lg"></div>
     </div>
   </div>
-  <div id="About" class="h-screen"></div>
+  <div id="About" class="px-12 py-20">
+    <p class="w-1/2 mb-8">{{ aboutMe }}</p>
+    <div class="flex items-center gap-x-4">
+      <Button>Contact me</Button>
+      <a v-for="contact in contacts" class="flex items-center w-12 aspect-square rounded-full" :href="contact.link"
+        target="_blank">
+        <Button class="w-full h-full rounded-full">
+          <Icon :name="contact.icon" />
+        </Button>
+      </a>
+    </div>
+  </div>
 </template>
