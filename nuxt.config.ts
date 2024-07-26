@@ -8,6 +8,8 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/content",
     "@nuxt/image",
+    "@nuxtjs/seo",
+    "@nuxtjs/sitemap",
   ],
   shadcn: {
     /**
@@ -25,11 +27,9 @@ export default defineNuxtConfig({
       theme: {
         default: 'github-light',
         dark: 'github-dark',
-        sepia: 'monokai',
       },
       langs: [
-        'c',
-        'cpp',
+        'shell', 'js', 'c', 'cpp', 'json', 'ts', 'html', 'css', 'vue', 'jsx', 'md', 'yaml', 'python'
       ]
     }
   }

@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  aboutMeData,
-  contactData,
-  introductionData,
-  ownerData,
-} from "~/data/data";
-import type { LinkItem } from "~/types";
+import { aboutMeData, contactData, introductionData, ownerData } from "~/data";
 const blogger = ownerData.name;
 const introduction = introductionData;
 const aboutMe = aboutMeData.description;

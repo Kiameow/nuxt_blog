@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navbarData } from '~/data/data';
+import { navbarData } from '~/data';
 const navItems = navbarData.links;
 </script>
 

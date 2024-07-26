@@ -36,7 +36,7 @@ const footerContent : FooterSection[] = [
     innerLink: true,
     list: [
       { text: "主页", link: "/" },
-      { text: "博客", link: "/blog" },
+      { text: "博客", link: "/blogs" },
       { text: "作品集", link: "/portfolio" },
       { text: "关于我", link: "/about" },
     ],

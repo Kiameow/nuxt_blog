@@ -11,7 +11,7 @@ export const navbarData: { links: LinkItem[] } = {
   ],
 };
 
-export const ownerData: { name: string; } = {
+export const ownerData: { name: string } = {
   name: "Kiameow",
 };
 
@@ -35,4 +35,15 @@ export const contactData: { contacts: ContactItem[] } = {
       icon: "grommet-icons:mail",
     },
   ],
+};
+
+export const seoData = {
+  siteTitle: "Kiameow's blog",
+  description: "Kiameow",
+  ogTitle: "Kiameow",
+  twitterDescription: "Kiameow",
+  image: "",
+  siteURL: "https://kiameow.top",
+  twitterHandle: "Badger_xxx",
+  mailAddress: "zhang_lumi@foxmail.com",
 };
