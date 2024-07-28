@@ -7,6 +7,9 @@ module.exports = {
   prefix: "",
   
   theme: {
+    fontFamily: {
+      'sans': ['Helvetica', 'Arial', 'Source Han Sans', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",

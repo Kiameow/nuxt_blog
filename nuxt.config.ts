@@ -31,6 +31,11 @@ export default defineNuxtConfig({
       langs: [
         'shell', 'js', 'c', 'cpp', 'json', 'ts', 'html', 'css', 'vue', 'jsx', 'md', 'yaml', 'python'
       ]
+    },
+    experimental: {
+      search: {
+        indexed: true,
+      }
     }
   }
 });
