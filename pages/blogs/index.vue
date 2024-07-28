@@ -22,6 +22,15 @@ articles.value?.forEach((article) => {
 });
 const selectedCategory = ref("全部");
 
+const searchTerm = ref('git');
+//const miniSearchOptions = defineMiniSearchOptions({
+//  fields: ["title"],
+//});
+watch(searchTerm, (newTerm) => {
+  
+});
+const results = await searchContent(searchTerm);
+
 function changeCategory(e: MouseEvent) {
   const target = e.target as HTMLButtonElement;
   selectedCategory.value = target.value;
@@ -38,26 +47,29 @@ function changeCategory(e: MouseEvent) {
         </Button>
       </div>
       <div class="relative flex-grow items-center max-h-10">
-        <Input id="search" type="text" placeholder="Search..." class="pl-10 rounded-full" />
+        <Input id="search" type="text" placeholder="Search..." class="pl-10 rounded-full" v-model="searchTerm" />
         <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
           <Search class="size-6 text-muted-foreground" />
         </span>
         <Icon class="absolute end-0 inset-y-0" name="material-symbols:close-small-outline-rounded" size="40px"
           style="color: gray" />
       </div>
+      <input type="text" v-model="searchTerm" class="border-black rounded-full" />
     </div>
-    <div class="grid grid-cols-2 gap-x-8 gap-y-16 my-10">
-      <NuxtLink class="flex gap-x-8 w-full" 
-        v-for="article in articles" 
-        :key="article._id"
-        v-show="article.categories.includes(selectedCategory) || selectedCategory === '全部'"
-        :to="article._path"
-      >
+    <div>
+      <pre>
+        {{ }}
+      </pre>
+    </div>
+    <div class="grid grid-cols-2 gap-x-12 gap-y-16 my-10">
+      <NuxtLink class="flex gap-x-8 w-full" v-for="article in articles" :key="article._id" v-show="article.categories.includes(selectedCategory) ||
+        selectedCategory === '全部'
+        " :to="article._path">
         <img class="rounded-3xl w-5/12 aspect-video object-cover" src="/images/default.jpg" alt="" />
         <div class="flex-grow relative py-4">
           <p class="text-2xl font-bold">{{ article.title }}</p>
           <div class="absolute bottom-4 w-full pr-4 flex justify-between">
-            <div class="flex justify-start gap-4">
+            <div class="flex justify-start gap-2">
               <Badge v-for="category in article.categories">{{
                 category
                 }}</Badge>
