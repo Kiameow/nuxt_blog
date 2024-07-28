@@ -21,3 +21,10 @@ export function getPostCardKeys(): (keyof PostCard)[] {
   const properties = Object.keys(templateObj) as (keyof PostCard)[];
   return properties;
 }
+
+export function createDefaultArticle(): {title: string, date: string} {
+  return {
+    title: "default title",
+    date: "1970-1-1",
+  }
+}

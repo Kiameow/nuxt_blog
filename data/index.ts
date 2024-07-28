@@ -22,6 +22,25 @@ export const aboutMeData: { description: string } = {
     "我是[你的名字]，一名充满激情的探索者和记录者，热衷于分享生活中的点滴发现和深刻思考。在这个博客上，我希望能与你一起探索生活的无限可能，无论是科技的前沿、艺术的魅力、旅行的奇遇还是心灵的触动。",
 };
 
+export const projectData: { name: string; description: string }[] = [
+  {
+    name: "Project1",
+    description: "Description1"
+  },
+  {
+    name: "Project2",
+    description: "Description2"
+  },
+  {
+    name: "Project2",
+    description: "Description2"
+  },
+  {
+    name: "Project2",
+    description: "Description2"
+  },
+]
+
 export const contactData: { contacts: ContactItem[] } = {
   contacts: [
     {

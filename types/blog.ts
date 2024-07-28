@@ -1,4 +1,4 @@
-import type { Image } from "./utils"
+import type { Image } from "./basic"
 
 export interface BlogPost {
   title: string
