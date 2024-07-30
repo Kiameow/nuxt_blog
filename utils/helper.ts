@@ -22,9 +22,14 @@ export function getPostCardKeys(): (keyof PostCard)[] {
   return properties;
 }
 
-export function createDefaultArticle(): {title: string, date: string} {
+export function createDefaultArticle(): PostCard {
   return {
     title: "default title",
     date: "1970-1-1",
+    _id: "default",
+    _path: "default",
+    description: "default description",
+    banner: createImage(),
+    categories: [],
   }
 }
