@@ -15,7 +15,7 @@ export interface PostCard {
   _id: string;
   _path: string;
   title: string;
-  description?: string;
+  description: string;
   date: string;
   banner: Image;
   categories: string[];

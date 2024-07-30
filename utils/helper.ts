@@ -1,6 +1,6 @@
 import type { Image, PostCard } from "~/types";
 
-export function createImage(): Image {
+export function createDefaultImage(): Image {
   return {
     src: 'default-src',
     alt: 'default-alt',
@@ -29,7 +29,7 @@ export function createDefaultArticle(): PostCard {
     _id: "default",
     _path: "default",
     description: "default description",
-    banner: createImage(),
+    banner: createDefaultImage(),
     categories: [],
   }
 }

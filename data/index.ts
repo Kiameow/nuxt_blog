@@ -1,7 +1,5 @@
-import type { LinkItem } from "~/types";
-interface ContactItem extends LinkItem {
-  icon: string;
-}
+import type { ContactItem, LinkItem, Project } from "~/types";
+
 export const navbarData: { links: LinkItem[] } = {
   links: [
     { text: "主页", link: "/" },
@@ -22,22 +20,30 @@ export const aboutMeData: { description: string } = {
     "我是[你的名字]，一名充满激情的探索者和记录者，热衷于分享生活中的点滴发现和深刻思考。在这个博客上，我希望能与你一起探索生活的无限可能，无论是科技的前沿、艺术的魅力、旅行的奇遇还是心灵的触动。",
 };
 
-export const projectData: { name: string; description: string }[] = [
+export const projectData: Project[] = [
   {
     name: "Project1",
-    description: "Description1"
+    description: "Description1",
+    link: "/",
+    banner: createDefaultImage(),
   },
   {
     name: "Project2",
-    description: "Description2"
+    description: "Description2",
+    link: "/",
+    banner: createDefaultImage(),
   },
   {
     name: "Project2",
-    description: "Description2"
+    description: "Description2",
+    link: "/",
+    banner: createDefaultImage(),
   },
   {
     name: "Project2",
-    description: "Description2"
+    description: "Description2",
+    link: "/",
+    banner: createDefaultImage(),
   },
 ]
 
