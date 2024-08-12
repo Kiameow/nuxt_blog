@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       theme: {
-        default: 'github-light',
+        default: 'dracula',
         dark: 'github-dark',
       },
       langs: [
@@ -36,6 +36,9 @@ export default defineNuxtConfig({
       search: {
         indexed: true,
       }
+    },
+    markdown: {
+      anchorLinks: false
     }
   },
 });

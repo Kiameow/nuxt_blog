@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import type { BlogPost } from "@/types/blog";
 import { seoData } from "~/data";
-import "github-markdown-css/github-markdown-light.css"
 const { path } = useRoute();
 
 const { data: article, error } = await useAsyncData(`blog-post-${path}`, () =>
-  queryContent().where({ _path: path }).findOne(),
+  queryContent().where({ _path: path }).findOne()
 );
 
 if (error.value) navigateTo("/blogs/404");
@@ -14,14 +13,17 @@ const data = computed<BlogPost>(() => {
   return {
     title: article.value?.title || "no-title available",
     description: article.value?.description || "no-description available",
-    image: article.value?.image || "/not-found.jpg",
+    image: article.value?.image || "/images/default.jpg",
     alt: article.value?.alt || "no alter data available",
     ogImage: article.value?.ogImage || "/not-found.jpg",
     date: article.value?.date || "not-date-available",
     tags: article.value?.tags || [],
     published: article.value?.published || false,
+    tocLinks: article.value?.body?.toc?.links || [],
   };
 });
+
+
 
 useHead({
   title: data.value.title || "",
@@ -88,11 +90,21 @@ defineOgImageComponent("Test", {
 </script>
 
 <template>
-  
-  <div class="px-6 py-20 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
+  <div
+    class="px-6 py-20 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12"
+  >
     <div class="col-span-12 lg:col-span-9">
+      <BlogHeader
+        :title="data.title"
+        :image="data.image"
+        :alt="data.alt"
+        :date="data.date"
+        :description="data.description"
+        :tags="data.tags"
+      />
       <div
-        class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg">
+        class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-headings:no-underline max-w-5xl mx-auto prose-neutral dark:prose-invert prose-img:rounded-lg"
+      >
         <ContentRenderer v-if="article" :value="article" class="markdown-body">
           <template #empty>
             <p>No content found.</p>
@@ -101,8 +113,8 @@ defineOgImageComponent("Test", {
       </div>
     </div>
 
+    <BlogToc :links="data.tocLinks" />
+
     <div class="flex flex-row flex-wrap md:flex-nowrap mt-10 gap-2"></div>
   </div>
 </template>
-
-
