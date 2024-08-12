@@ -39,6 +39,10 @@ function changeCategory(e: MouseEvent) {
   selectedCategory.value = target.value;
 }
 
+function clearSearchTerm() {
+  searchTerm.value = '';
+}
+
 </script>
 
 <template>
@@ -51,7 +55,7 @@ function changeCategory(e: MouseEvent) {
         </Button>
       </div>
       <div class="relative flex-grow items-center max-h-10">
-        <BlogSearchBar v-model="searchTerm" />
+        <BlogSearchBar v-model="searchTerm" @clear-search="clearSearchTerm" />
       </div>
     </div>
     <div class="grid grid-cols-2 gap-x-12 gap-y-16 my-10">
