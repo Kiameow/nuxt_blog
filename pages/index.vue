@@ -46,7 +46,7 @@ const articles = computed(() => {
   <div id="Portfolio" class="py-20">
     <HomeLatestPortfolio :projects="projects" />
   </div>
-  <div id="About" class="px-12 py-20">
+  <div id="About" class="px-12 py-10">
     <HomeAbout :about-me="aboutMe" :contacts="contacts" />
   </div>
 </template>

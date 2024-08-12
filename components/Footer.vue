@@ -5,15 +5,15 @@
 // copy right
 // sitemap
 // bei an hao
-import type { LinkItem } from '~/types';
+import type { LinkItem } from "~/types";
 
 interface FooterSection {
   name: string;
   innerLink: boolean;
-  list: LinkItem[]; 
-} 
+  list: LinkItem[];
+}
 
-const footerContent : FooterSection[] = [
+const footerContent: FooterSection[] = [
   {
     name: "致谢",
     innerLink: false,
@@ -48,18 +48,22 @@ const footerContent : FooterSection[] = [
   },
 ];
 
-const filteredFooterContent = footerContent.filter(section => section.list && section.list.length);
-
+const filteredFooterContent = footerContent.filter(
+  (section) => section.list && section.list.length
+);
 </script>
 
 <template>
-  <div class="flex justify-around">
-    <div v-for="section in filteredFooterContent">
-      <p>{{ section.name }}</p>
-      <div v-for="item in section.list">
-        <NuxtLink v-if="section.innerLink" :to="item.link">{{ item.text }}</NuxtLink>
-        <a v-else :href="item.link" target="_blank">{{ item.text }}</a>
+    <hr class="my-8 w-11/12 mx-auto" />
+    <div class="flex justify-around mb-20">
+      <div v-for="section in filteredFooterContent">
+        <p class="font-bold text-lg">{{ section.name }}</p>
+        <div v-for="item in section.list">
+          <NuxtLink v-if="section.innerLink" :to="item.link">{{
+            item.text
+          }}</NuxtLink>
+          <a v-else :href="item.link" target="_blank">{{ item.text }}</a>
+        </div>
       </div>
     </div>
-  </div>
 </template>

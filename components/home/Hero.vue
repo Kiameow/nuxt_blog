@@ -9,14 +9,14 @@ defineProps<{
 </script>
 <template>
   <div class="h-full flex flex-col justify-center items-center relative">
-    <h1 class="border text-8xl">{{ blogger }}</h1>
-    <div>
+    <h1 class="text-[10rem] font-AlexBrush">{{ blogger }}</h1>
+    <div class="text-[1.4rem]">
       {{ introduction }}
     </div>
-    <div class="absolute bottom-4 right-4 border flex justify-end gap-4">
-      <a v-for="contact in contacts" class="flex items-center" :href="contact.link" target="_blank">
+    <div class="absolute bottom-4 right-4 flex justify-end gap-4">
+      <a v-for="contact in contacts" class="flex items-center gap-1" :href="contact.link" target="_blank">
         <Icon :name="contact.icon" />
-        <p>{{ contact.text }}</p>
+        <p class="italic">{{ contact.text }}</p>
       </a>
     </div>
   </div>

@@ -37,5 +37,5 @@ export default defineNuxtConfig({
         indexed: true,
       }
     }
-  }
+  },
 });

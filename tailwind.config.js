@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     fontFamily: {
       'sans': ['Helvetica', 'Arial', 'Source Han Sans', 'sans-serif'],
+      'AlexBrush': ['AlexBrush', 'cursive'],
     },
     container: {
       center: true,
