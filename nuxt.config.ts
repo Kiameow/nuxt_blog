@@ -11,6 +11,13 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@nuxtjs/sitemap",
   ],
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', href: '/images/kiameow-favicon.png' }
+      ]
+    }
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
