@@ -11,13 +11,12 @@ if (error.value) navigateTo("/blogs/404");
 
 const data = computed<BlogPost>(() => {
   return {
-    title: article.value?.title || "no-title available",
-    description: article.value?.description || "no-description available",
-    image: article.value?.image || "/images/default.jpg",
-    alt: article.value?.alt || "no alter data available",
-    ogImage: article.value?.ogImage || "/not-found.jpg",
-    date: article.value?.date || "not-date-available",
-    tags: article.value?.tags || [],
+    title: article.value?.title || "no title available",
+    description: article.value?.description || "no description available",
+    banner: article.value?.banner || {src: "/images/default.jpg", alt: "no banner available"},
+    ogImage: article.value?.banner?.src || "/images/default.jpg",
+    date: article.value?.date || "no date available",
+    categories: article.value?.categories || [],
     published: article.value?.published || false,
     tocLinks: article.value?.body?.toc?.links || [],
   };
@@ -50,7 +49,7 @@ useHead({
     },
     {
       property: "og:image",
-      content: data.value.ogImage || data.value.image,
+      content: data.value.ogImage || data.value.banner.src,
     },
     // Test on: https://cards-dev.twitter.com/validator or https://socialsharepreview.com/
     { name: "twitter:site", content: "@qdnvubp" },
@@ -69,7 +68,7 @@ useHead({
     },
     {
       name: "twitter:image",
-      content: data.value.ogImage || data.value.image,
+      content: data.value.ogImage || data.value.banner.src,
     },
   ],
   link: [
@@ -96,11 +95,10 @@ defineOgImageComponent("Test", {
     <div class="col-span-12 lg:col-span-9">
       <BlogHeader
         :title="data.title"
-        :image="data.image"
-        :alt="data.alt"
+        :banner="data.banner"
         :date="data.date"
         :description="data.description"
-        :tags="data.tags"
+        :categories="data.categories"
       />
       <div
         class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-headings:no-underline max-w-5xl mx-auto prose-neutral dark:prose-invert prose-img:rounded-lg"

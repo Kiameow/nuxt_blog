@@ -1,14 +1,15 @@
+import type { TocLink } from "@nuxt/content";
 import type { Image } from "./basic"
 
 export interface BlogPost {
-  title: string
-  date: string
-  description: string
-  image: string
-  alt: string
-  ogImage: string
-  tags: string[]
-  published: boolean
+  title: string;
+  date: string;
+  description: string;
+  banner: Image;
+  ogImage: string;
+  categories: string[];
+  published: boolean;
+  tocLinks: TocLink[];
 }
 
 export interface PostCard {

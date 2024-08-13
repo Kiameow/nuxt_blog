@@ -1,20 +1,20 @@
 <script setup lang="ts">
+import type { Image } from '~/types';
+
 interface Props {
   title: string
-  image: string
-  alt: string
+  banner: Image
   description: string
   date: string
-  tags: Array<string>
+  categories: Array<string>
 }
 
 withDefaults(defineProps<Props>(), {
   title: 'no-title',
-  image: '#',
-  alt: 'no-img',
+  banner: () => ({src: '/images/default.jpg', alt: 'no-img'}),
   description: 'no description',
   date: 'no-date',
-  tags: () => ([]),
+  categories: () => ([]),
 })
 </script>
 
@@ -24,8 +24,8 @@ withDefaults(defineProps<Props>(), {
       {{ title || '' }}
     </h1>
     <NuxtImg
-      :src="image || ''"
-      :alt="alt || ''"
+      :src="banner.src || ''"
+      :alt="banner.alt || ''"
       width="600"
       class="m-auto rounded-2xl shadow-lg h-32 md:h-72 w-4/6 md:w-4/5 content-center object-cover"
     />
@@ -38,8 +38,8 @@ withDefaults(defineProps<Props>(), {
           <p>{{ date || '' }}</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap my-5">
-          <template v-for="tag in tags" :key="tag">
-            <span class="bg-gray-200 dark:bg-slate-900 rounded-md px-2 py-1 font-semibold">{{ tag }}</span>
+          <template v-for="c in categories" :key="c">
+            <span class="bg-gray-200 dark:bg-slate-900 rounded-md px-2 py-1 font-semibold">{{ c }}</span>
           </template>
         </div>
       </div>
