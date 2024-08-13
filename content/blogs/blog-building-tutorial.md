@@ -3,7 +3,7 @@ title: "部署hexo博客至云服务器"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-12-07"
 banner:
-  src: "../../images/hexo.png"
+  src: "/images/default.jpg"
   alt: "hexo"
   caption: 'Photo by <u><a href="https://blog.getform.io/content/images/size/w2000/2019/10/hexo-cover-01-800x450-1.png">Hexo</a></u>'
 categories:

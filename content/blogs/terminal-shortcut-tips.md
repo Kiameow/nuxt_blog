@@ -3,7 +3,7 @@ title: "Terminal快捷键小tip"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-04-17"
 banner:
-  src: "../../images/terminal.jpg"
+  src: "/images/default.jpg"
   alt: "image description"
   caption: 'Photo by <u><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freecodecamp.org%2Fnews%2Fcommand-line-for-beginners%2F&psig=AOvVaw0vLh00ZRBJMZrkJ8L92YNh&ust=1714792141307000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOiI3tXA8IUDFQAAAAAdAAAAABAE">freecodecamp</a></u>'
 categories:

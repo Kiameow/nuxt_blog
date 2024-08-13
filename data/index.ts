@@ -1,4 +1,4 @@
-import type { ContactItem, LinkItem, Project } from "~/types";
+import type { ContactItem, Image, LinkItem, Project } from "~/types";
 
 export const navbarData: { links: LinkItem[] } = {
   links: [
@@ -15,9 +15,13 @@ export const ownerData: { name: string } = {
 
 export const introductionData = "web developer / ameture designer";
 
-export const aboutMeData: { description: string } = {
+export const aboutMeData: { description: string; avatar: Image } = {
   description:
     "你好哇, 我是Kiameow，一名热爱编程的前端工程师，一名充满激情的探索者和记录者，热衷于分享生活中的点滴发现和深刻思考。在这个博客上，我希望能与你一起探索生活的无限可能，无论是科技的前沿、艺术的魅力、旅行的奇遇还是心灵的触动。",
+  avatar: {
+    src: "/images/avatar.png",
+    alt: "Kiameow's avatar",
+  },
 };
 
 export const projectData: Project[] = [
@@ -25,25 +29,37 @@ export const projectData: Project[] = [
     name: "Project1",
     description: "Description1",
     link: "/",
-    banner: createDefaultImage(),
+    banner: {
+      src: "/images/project1.png",
+      alt: "Project1",
+    },
   },
   {
     name: "Project2",
     description: "Description2",
     link: "/",
-    banner: createDefaultImage(),
+    banner: {
+      src: "/images/project1.png",
+      alt: "Project1",
+    },
   },
   {
     name: "Project2",
     description: "Description2",
     link: "/",
-    banner: createDefaultImage(),
+    banner: {
+      src: "/images/project1.png",
+      alt: "Project1",
+    },
   },
   {
     name: "Project2",
     description: "Description2",
     link: "/",
-    banner: createDefaultImage(),
+    banner: {
+      src: "/images/project1.png",
+      alt: "Project1",
+    },
   },
 ]
 

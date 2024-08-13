@@ -2,7 +2,7 @@ import type { Image, PostCard } from "~/types";
 
 export function createDefaultImage(): Image {
   return {
-    src: 'default-src',
+    src: '/images/default.jpg',
     alt: 'default-alt',
   };
 }

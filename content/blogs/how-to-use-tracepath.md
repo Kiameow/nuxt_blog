@@ -3,7 +3,7 @@ title: "Tracepath工具的使用"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-04-23"
 banner:
-  src: "../../images/trace_path.jpg"
+  src: "/images/default.jpg"
   alt: "image description"
   caption: 'Photo by <u><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.redhat.com%2Fsysadmin%2Ftraceroute-tracepath-network-troubleshooting&psig=AOvVaw3_8HyqcymlhORgyqfl1xZh&ust=1714792994554000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMjooe7D8IUDFQAAAAAdAAAAABAE">Red Hat</a></u>'
 categories:
@@ -34,11 +34,9 @@ Q：
 A：  
 执行命令`tracepath -b gaia.cs.umass.edu`
 结果:在 30 跳以后，发现仍未到达服务端，于是设定最大跳数为 50 跳。
-![](/images/tracepath_fail_result.png)
 
 执行命令`tracepath -b -m 50 gaia.cs.umass.edu`
 结果:成功了，gaia.cs.umass.edu 的上一个路由为`nscs1bbs1.cs.umass.edu (128.119.240.253)`
-![](/images/tracepath_success_result.png)
 
 ## tracepath 显示数据解释
 

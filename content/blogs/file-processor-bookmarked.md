@@ -3,7 +3,7 @@ title: "文件处理工具收录"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-05-20"
 banner:
-  src: "../../images/kelly-sikkema-Hl3LUdyKRic-unsplash.jpg"
+  src: "/images/default.jpg"
   alt: "image description"
   caption: 'Photo by <u><a href="https://unsplash.com/photos/Nc5Q_CEcY44">Florian Olivo</a></u>'
 categories:

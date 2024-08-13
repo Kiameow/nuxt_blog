@@ -7,7 +7,7 @@ const { data: article, error } = await useAsyncData(`blog-post-${path}`, () =>
   queryContent().where({ _path: path }).findOne()
 );
 
-if (error.value) navigateTo("/blogs/404");
+if (error.value) navigateTo("/404");
 
 const data = computed<BlogPost>(() => {
   return {
@@ -80,12 +80,12 @@ useHead({
 });
 
 // Generate OG Image
-defineOgImageComponent("Test", {
-  headline: "Greetings 👋",
-  title: data.value.title || "",
-  description: data.value.description || "",
-  link: data.value.ogImage,
-});
+// defineOgImageComponent("Test", {
+//   headline: "Greetings 👋",
+//   title: data.value.title || "",
+//   description: data.value.description || "",
+//   link: data.value.ogImage,
+// });
 </script>
 
 <template>

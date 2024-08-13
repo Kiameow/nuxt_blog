@@ -1,9 +1,18 @@
+import { seoData } from "./data";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   nitro: {
     static: true,
+  },
+  site: {
+    url: seoData.siteURL,
+    identity: {
+      type: 'Person',
+    },
+    twitter: seoData.twitterHandle,
   },
   modules: [
     "@nuxtjs/tailwindcss",
@@ -50,5 +59,5 @@ export default defineNuxtConfig({
     markdown: {
       anchorLinks: false
     }
-  },
+  }
 });

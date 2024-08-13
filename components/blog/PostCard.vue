@@ -8,7 +8,7 @@ defineProps<{
 </script>
 <template>
   <NuxtLink class="flex gap-x-8 w-full" :to="article._path">
-    <NuxtImg class="rounded-3xl w-5/12 aspect-video object-cover" src="/images/default.jpg" alt="" placeholder="/images/default.jpg"/>
+    <NuxtImg class="rounded-3xl w-5/12 aspect-video object-cover" src="/images/default.jpg" alt="" placeholder="/images/default.jpg" loading="lazy"/>
     <div class="flex-grow relative py-4">
       <p class="text-2xl font-bold">{{ article.title }}</p>
       <div class="absolute bottom-4 w-full pr-4 flex justify-between">
