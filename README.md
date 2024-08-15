@@ -12,6 +12,7 @@ try to rebuild my personal blog using nuxt and gsap.
 - [ ] page performance optimization.(SEO, images)
 - [ ] add more animations.
 - [ ] responsive design.
-- [ ] add comments section.
+- [ ] add zen mode.
 - [ ] dark mode.
 - [ ] newsletter subscription.
+- [ ] add comments section.
