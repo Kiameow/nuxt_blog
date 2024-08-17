@@ -1,7 +1,7 @@
 ---
 title: "webpack runtime 对 cjs 模块的打包原理"
 description: "你是否好奇require和module.exports是如何工作的？"
-date: "2023-04-23"
+date: "2023-08-17"
 banner:
   src: "/images/2401-00.png"
   alt: "awesome code image"
