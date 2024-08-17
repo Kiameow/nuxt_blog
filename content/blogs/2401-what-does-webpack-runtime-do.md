@@ -3,11 +3,11 @@ title: "webpack runtime 对 cjs 模块的打包原理"
 description: "你是否好奇require和module.exports是如何工作的？"
 date: "2023-04-23"
 banner:
-  src: "/images/default.jpg"
-  alt: "image description"
+  src: "/images/2401-00.png"
+  alt: "awesome code image"
   caption: ""
 categories:
-  - "工具"
+  - "前端工程化"
   - "教程"
 keywords:
   - "前端工程化"
@@ -157,7 +157,8 @@ sum2(1, 8);
 
 不需要感到恐慌，我们一一来拆解其中的内容。
 
-1. 首先，webpack会将所有模块都打包到一个名为`__webpack_modules__`的数组中，数组的下标就是模块的id（0下标没有被使用）, 数组的每一项都是一个副作用函数。你会发现，函数的内容其实就是每个模块文件中的内容，只是像`require`这样的关键字被替换成了`__webpack_require__`。
+### `__webpack_modules__`
+首先，webpack会将所有模块都打包到一个名为`__webpack_modules__`的数组中，数组的下标就是模块的id（0下标没有被使用）, 数组的每一项都是一个副作用函数。你会发现，函数的内容其实就是每个模块文件中的内容，只是像`require`这样的关键字被替换成了`__webpack_require__`。
 
 让我们再来观察函数的参数，参数的数量似乎不是统一的，但最多的情况下，函数的第一个参数是`module`（或者带有`__unused`前缀），第二个参数是`module.exports`（或者带有`__unused`前缀），第三个参数是`__webpack_require__`。
 
@@ -165,9 +166,11 @@ sum2(1, 8);
 
 至于`__unused`前缀，则完全是js位置参数的原因，必须要有一个占位符。
 
-2. `__webpack_module_cache__`是一个对象，用于缓存模块，当模块被多次引入时，webpack会直接从缓存中取出模块的导出对象，而不是重新执行模块。
+### `__webpack_module_cache__`
+`__webpack_module_cache__`是一个对象，用于缓存模块，当模块被多次引入时，webpack会直接从缓存中取出模块的导出对象，而不是重新执行模块。
 
-3. `__webpack_require__`也就是`require`函数的webpack实现，它接收模块的id作为参数，然后返回模块的导出对象。过程很简单，先检查缓存，如果缓存中没有该模块的导出对象，则创建一个新的模块对象，这里的新建对象比较有意思，`var module = __webpack_module_cache__[moduleId] = {	exports: {}}`是一个连等的形式，这在模块化系统中很常见，由于js中的对象赋值是引用传递，这样的形式使得`module`和`__webpack_module_cache__[moduleId]`缓存对象指向同一个对象。  
+### `__webpack_require__`
+`__webpack_require__`也就是`require`函数的webpack实现，它接收模块的id作为参数，然后返回模块的导出对象。过程很简单，先检查缓存，如果缓存中没有该模块的导出对象，则创建一个新的模块对象，这里的新建对象比较有意思，`var module = __webpack_module_cache__[moduleId] = {	exports: {}}`是一个连等的形式，这在模块化系统中很常见，由于js中的对象赋值是引用传递，这样的形式使得`module`和`__webpack_module_cache__[moduleId]`缓存对象指向同一个对象。  
 
 后续`__webpack_modules__[moduleId](module, module.exports, __webpack_require__);`执行了模块函数，`module`被传入了，模块函数的副作用便是将模块的导出对象赋值给`module.exports`， 那么与此同时，缓存对象的exports属性也被赋值了，因为它们指向相同的对象。
 
@@ -184,7 +187,7 @@ function sum(a, b) {
 }
 ```
 
-这就是所有的流程啦！
+这就是所有的流程啦🎉
 
 ## 彩蛋
 我们发现，模块一旦导出，就会被缓存下来，那么也就是说，如果你导出了一个对象，那么你在所有文件中使用的该对象都是同一个对象，这也就意味着，如果你修改了这个对象，那么其他文件中也会受到影响。
