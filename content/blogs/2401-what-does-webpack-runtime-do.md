@@ -31,7 +31,7 @@ exports.myWarn = function myWarn(x) {
 
 ```javascript
 // sum.js
-const { myWarn, console } = require('./console');
+const { myWarn, myConsole } = require('./console');
 
 module.exports = function sum(a, b) {
     myConsole(a + b);
