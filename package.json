@@ -38,6 +38,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@tailwindcss/typography": "^0.5.14",
     "globals": "^15.8.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "vue-tsc": "^2.1.6"
   }
 }
