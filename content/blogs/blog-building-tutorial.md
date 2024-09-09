@@ -2,6 +2,7 @@
 title: "部署hexo博客至云服务器"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-12-07"
+published: true
 banner:
   src: "/images/default.jpg"
   alt: "hexo"

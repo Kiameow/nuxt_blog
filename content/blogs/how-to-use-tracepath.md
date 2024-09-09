@@ -2,6 +2,7 @@
 title: "Tracepath工具的使用"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-04-23"
+published: true
 banner:
   src: "/images/default.jpg"
   alt: "image description"

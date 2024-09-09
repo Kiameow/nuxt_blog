@@ -20,4 +20,5 @@ export interface PostCard {
   date: string;
   banner: Image;
   categories: string[];
+  published: boolean;
 }

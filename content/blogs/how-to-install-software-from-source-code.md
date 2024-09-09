@@ -2,6 +2,7 @@
 title: "如何从源代码安装软件"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-07-04"
+published: true
 banner:
   src: "/images/default.jpg"
   alt: "image description"

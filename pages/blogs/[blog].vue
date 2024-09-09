@@ -7,7 +7,8 @@ const { data: article, error } = await useAsyncData(`blog-post-${path}`, () =>
   queryContent().where({ _path: path }).findOne()
 );
 
-if (error.value) navigateTo("/404");
+// can the article truly be hidden?
+if (error.value || article.value?.published === false) navigateTo("/404");
 
 const data = computed<BlogPost>(() => {
   return {

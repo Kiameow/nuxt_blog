@@ -2,6 +2,7 @@
 title: "文件处理工具收录"
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-05-20"
+published: true
 banner:
   src: "/images/default.jpg"
   alt: "image description"

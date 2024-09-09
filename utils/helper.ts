@@ -17,6 +17,7 @@ export function getPostCardKeys(): (keyof PostCard)[] {
     banner: undefined,
     categories: undefined,
     date: undefined,
+    published: undefined,
   };
   const properties = Object.keys(templateObj) as (keyof PostCard)[];
   return properties;
@@ -31,5 +32,6 @@ export function createDefaultArticle(): PostCard {
     description: "default description",
     banner: createDefaultImage(),
     categories: [],
+    published: true,
   }
 }

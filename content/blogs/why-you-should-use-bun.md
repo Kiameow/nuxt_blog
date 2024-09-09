@@ -2,15 +2,16 @@
 title: ""
 description: "This description will be used for the article listing and search results on Google."
 date: "2023-04-23"
+published: false
 banner:
   src: "/images/default.jpg"
   alt: "image description"
   caption: ""
 categories:
   - "工具"
-  - "教程"
 keywords:
-  - "Tracepath"
+  - "Bun"
+  - "Package Manager"
 ---
 
 1. Windows support is now available for Bun.

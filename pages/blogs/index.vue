@@ -26,11 +26,15 @@ const selectedCategory = ref("全部");
 const searchTerm = ref('');
 const debouncedSearch = debouncedRef(searchTerm, 100);
 
+const publishedArticles = computed(() => {
+  return articles.value?.filter(v => v.published);
+})
+
 const filteredArticles = computed(() => {
   if (selectedCategory.value === "全部") {
-    return articles.value?.filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
+    return publishedArticles.value?.filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
   } else {
-    return articles.value?.filter(v => v.categories.includes(selectedCategory.value)).filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
+    return publishedArticles.value?.filter(v => v.categories.includes(selectedCategory.value)).filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
   }
 })
 

@@ -9,7 +9,8 @@ try to rebuild my personal blog using nuxt and gsap.
 - [x] change the layout of portfolio page.
 - [x] design the about me page.
 - [x] style the article page.
-- [ ] new post script.
+- [x] new post script.
+- [ ] add draft property to posts.
 - [ ] page performance optimization.(SEO, images)
 - [ ] add more animations.
 - [ ] responsive design.
@@ -17,3 +18,4 @@ try to rebuild my personal blog using nuxt and gsap.
 - [ ] dark mode.
 - [ ] newsletter subscription.
 - [ ] add comments section.
+- [ ] add webui for admin.
