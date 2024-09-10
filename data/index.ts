@@ -1,4 +1,4 @@
-import type { ContactItem, Image, LinkItem, Project } from "~/types";
+import type { ContactItem, FooterSection, Image, LinkItem, Project } from "~/types";
 
 export const navbarData: { links: LinkItem[] } = {
   links: [
@@ -88,3 +88,44 @@ export const seoData = {
   twitterHandle: "Badger_xxx",
   mailAddress: "zhang_lumi@foxmail.com",
 };
+
+export const footerContent: FooterSection[] = [
+  {
+    name: "致谢",
+    innerLink: false,
+    list: [
+      { text: "Nuxt", link: "nuxt.com" },
+      { text: "GSAP", link: "gsap.com" },
+      { text: "sonar", link: "https://www.sonarmusic.com.au/" },
+    ],
+  },
+  {
+    name: "联系我",
+    innerLink: false,
+    list: [
+      { text: "Github", link: "https://github.com/Kiameow" },
+      { text: "Email", link: "mailto:zhang_lumi@foxmail.com" },
+    ],
+  },
+  {
+    name: "站点地图",
+    innerLink: true,
+    list: [
+      { text: "主页", link: "/" },
+      { text: "博客", link: "/blogs" },
+      { text: "作品集", link: "/portfolio" },
+      { text: "关于我", link: "/about" },
+    ],
+  },
+  {
+    name: "友情链接",
+    innerLink: false,
+    list: [],
+  },
+];
+
+export const ICPFiling : LinkItem = {
+  text: "浙ICP备2023046775号-1",
+  link: "https://beian.miit.gov.cn/",
+  newWindow: true,
+}

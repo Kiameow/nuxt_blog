@@ -1,6 +1,7 @@
 export interface LinkItem {
   text: string;
   link: string;
+  newWindow?: boolean;
 }
 
 export interface ContactItem extends LinkItem {

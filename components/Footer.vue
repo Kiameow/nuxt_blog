@@ -6,47 +6,7 @@
 // sitemap
 // bei an hao
 import type { LinkItem } from "~/types";
-
-interface FooterSection {
-  name: string;
-  innerLink: boolean;
-  list: LinkItem[];
-}
-
-const footerContent: FooterSection[] = [
-  {
-    name: "致谢",
-    innerLink: false,
-    list: [
-      { text: "Nuxt", link: "nuxt.com" },
-      { text: "GSAP", link: "gsap.com" },
-      { text: "sonar", link: "https://www.sonarmusic.com.au/" },
-    ],
-  },
-  {
-    name: "联系我",
-    innerLink: false,
-    list: [
-      { text: "Github", link: "https://github.com/Kiameow" },
-      { text: "Email", link: "mailto:zhang_lumi@foxmail.com" },
-    ],
-  },
-  {
-    name: "站点地图",
-    innerLink: true,
-    list: [
-      { text: "主页", link: "/" },
-      { text: "博客", link: "/blogs" },
-      { text: "作品集", link: "/portfolio" },
-      { text: "关于我", link: "/about" },
-    ],
-  },
-  {
-    name: "友情链接",
-    innerLink: false,
-    list: [],
-  },
-];
+import { footerContent, ICPFiling } from "~/data";
 
 const filteredFooterContent = footerContent.filter(
   (section) => section.list && section.list.length
@@ -54,8 +14,9 @@ const filteredFooterContent = footerContent.filter(
 </script>
 
 <template>
-    <hr class="my-8 w-11/12 mx-auto" />
-    <div class="flex justify-around mb-20">
+  <hr class="my-8 w-11/12 mx-auto" />
+  <div class="mb-10">
+    <div class="flex justify-around mb-10">
       <div v-for="section in filteredFooterContent">
         <p class="font-bold text-lg">{{ section.name }}</p>
         <div v-for="item in section.list">
@@ -66,4 +27,8 @@ const filteredFooterContent = footerContent.filter(
         </div>
       </div>
     </div>
+    <div class="flex justify-center" v-if="ICPFiling.text.length > 0">
+      <a :href="ICPFiling.link" target="_blank">{{ ICPFiling.text }}</a>
+    </div>
+  </div>
 </template>
