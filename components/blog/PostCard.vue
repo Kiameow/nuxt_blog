@@ -8,9 +8,9 @@ defineProps<{
 </script>
 <template>
   <NuxtLink class="flex gap-x-8 w-full" :to="article._path">
-    <NuxtImg class="rounded-3xl w-5/12 aspect-video object-cover" src="/images/default.jpg" alt="" placeholder="/images/default.jpg" loading="lazy"/>
+    <NuxtImg width="300" height="160" format="webp" class="rounded-lg aspect-video object-cover" :src="article.banner.src" alt="" placeholder="/images/default.jpg" loading="lazy"/>
     <div class="flex-grow relative py-4">
-      <p class="text-2xl font-bold">{{ article.title }}</p>
+      <p class="text-2xl font-bold mb-10">{{ article.title }}</p>
       <div class="absolute bottom-4 w-full pr-4 flex justify-between">
         <div class="flex justify-start gap-2">
           <Badge v-for="category in article.categories">{{

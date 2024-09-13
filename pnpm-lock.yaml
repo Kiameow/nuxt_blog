@@ -66,6 +66,9 @@ importers:
       '@iconify-json/grommet-icons':
         specifier: ^1.1.11
         version: 1.1.11
+      '@iconify-json/material-symbols':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/mdi':
         specifier: ^1.1.68
         version: 1.1.68
@@ -745,6 +748,9 @@ packages:
 
   '@iconify-json/grommet-icons@1.1.11':
     resolution: {integrity: sha512-69RSSscQ9oDLO3Tq5PrOjiPiRldkhTy+IYEFjuTzubc5kWz0gxHPJYg/Jgkow7KAp6IqWrp99ioMCikD1UV54A==}
+
+  '@iconify-json/material-symbols@1.2.1':
+    resolution: {integrity: sha512-r9yaBzlUmN87aCTSoCNtDCd7R9F0iVDjNPL9QHHhm1WglFJvTUKx9iBC5xcZpP0qN0bg9R5FkM90CndWxEBAnw==}
 
   '@iconify-json/mdi@1.1.68':
     resolution: {integrity: sha512-7//TKCiXLU6kNWeOJRTBbisofVO7rF1sD1TZTL4/V9nqlmVNczQ5IOY0GgKOTsitkcTnX9GXgrgbjw3OI5B69w==}
@@ -5255,6 +5261,10 @@ snapshots:
       - vue
 
   '@iconify-json/grommet-icons@1.1.11':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/material-symbols@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 

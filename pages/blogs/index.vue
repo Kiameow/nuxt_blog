@@ -63,7 +63,7 @@ function clearSearchTerm() {
       </div>
     </div>
     <div class="grid grid-cols-2 gap-x-12 gap-y-16 my-10">
-      <BlogPostCard v-for="article in filteredArticles" :article="article" />
+      <BlogPostCard v-for="article in filteredArticles" :article="article" class="min-h-[160px]" />
       <div v-if="filteredArticles.length === 0">No Results</div>
     </div>
   </div>
