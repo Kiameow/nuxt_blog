@@ -8,19 +8,7 @@ export function createDefaultImage(): Image {
 }
 
 export function getPostCardKeys(): (keyof PostCard)[] {
-  type templateOfPostCard = Record<(keyof PostCard) , undefined>;
-  const templateObj : templateOfPostCard = {
-    _id: undefined,
-    _path: undefined,
-    title: undefined,
-    description: undefined,
-    banner: undefined,
-    categories: undefined,
-    date: undefined,
-    published: undefined,
-  };
-  const properties = Object.keys(templateObj) as (keyof PostCard)[];
-  return properties;
+  return ['_id', '_path', 'categories', 'date', 'description', 'published', 'title'];
 }
 
 export function createDefaultArticle(): PostCard {
@@ -30,7 +18,6 @@ export function createDefaultArticle(): PostCard {
     _id: "default",
     _path: "default",
     description: "default description",
-    banner: createDefaultImage(),
     categories: [],
     published: true,
   }

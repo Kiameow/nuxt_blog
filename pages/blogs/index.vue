@@ -2,11 +2,15 @@
 import type { ParsedContent } from "@nuxt/content";
 import { debouncedRef } from "@vueuse/core";
 import type { PostCard } from "~/types";
+import { gsap } from 'gsap';
 
-const { data } = await useAsyncData("articles", () => {
-  return queryContent("/blogs").only(getPostCardKeys()).find();
+const { data: articles } = await useAsyncData<PostCard[]>('articles', () => {
+  return queryContent('/blogs')
+    .where({ published: true })
+    .only(getPostCardKeys())
+    .sort({ date: -1 })
+    .find() as Promise<PostCard[]>;
 });
-const articles = ref(data.value as PostCard[]);
 
 const allCategories = new Map();
 allCategories.set("全部", articles.value?.length);
@@ -21,22 +25,34 @@ articles.value?.forEach((article) => {
     }
   });
 });
-const selectedCategory = ref("全部");
 
+const selectedCategory = ref("全部");
 const searchTerm = ref('');
 const debouncedSearch = debouncedRef(searchTerm, 100);
 
-const publishedArticles = computed(() => {
-  return articles.value?.filter(v => v.published);
-})
-
 const filteredArticles = computed(() => {
   if (selectedCategory.value === "全部") {
-    return publishedArticles.value?.filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
+    return articles.value?.filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase())) ?? [];
   } else {
-    return publishedArticles.value?.filter(v => v.categories.includes(selectedCategory.value)).filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
+    return articles.value
+      ?.filter(v => v.categories.includes(selectedCategory.value))
+      .filter(v => v.title?.toLowerCase().includes(debouncedSearch.value.toLowerCase()))
+      ?? [];
   }
-})
+});
+
+const articlesByYear = computed(() => {
+  const grouped = filteredArticles.value?.reduce((acc, article) => {
+    const year = article.date.split('-')[0];
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(article);
+    return acc;
+  }, {} as Record<string, PostCard[]>);
+  return Object.entries(grouped)
+  .sort((a, b) => Number(b[0]) - Number(a[0]));
+});
 
 function changeCategory(e: MouseEvent) {
   const target = e.target as HTMLButtonElement;
@@ -62,9 +78,27 @@ function clearSearchTerm() {
         <BlogSearchBar v-model="searchTerm" @clear-search="clearSearchTerm" />
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-x-12 gap-y-16 my-10">
-      <BlogPostCard v-for="article in filteredArticles" :article="article" class="min-h-[160px]" />
+    <div class="flex flex-col gap-y-8 my-10 w-[800px] mx-auto">
+      <!-- <BlogPostCard v-for="article in filteredArticles" :article="article" class="min-h-[160px]" /> -->
+      <div v-for="([year, articlesPerYear], index) in articlesByYear" :key="index" >
+        <span class="font-sans text-[8rem] hollow-text">{{ year }}</span>
+        <dir v-for="article in articlesPerYear" class="flex items-center gap-x-4">
+          <span class="w-2 aspect-square rounded-full inline-block bg-black"></span>
+          <BlogPostLine :article="article" class="flex-grow"/>
+        </dir>
+      </div>
       <div v-if="filteredArticles.length === 0">No Results</div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.hollow-text {
+  -webkit-text-stroke: 1px rgb(204, 204, 204);
+  color: transparent;
+}
+
+.hollow-text-dark {
+
+}
+</style>

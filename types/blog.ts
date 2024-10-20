@@ -18,7 +18,6 @@ export interface PostCard {
   title: string;
   description: string;
   date: string;
-  banner: Image;
   categories: string[];
   published: boolean;
 }

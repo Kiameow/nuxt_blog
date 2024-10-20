@@ -1,17 +1,17 @@
 <script setup lang='ts'>
 import type { PostCard } from '~/types';
 import Badge from '../ui/badge/Badge.vue';
-import FadeInImg from '../FadeInImg.vue';
 
 defineProps<{
   article: PostCard
 }>()
 
-const img = useImage()
 </script>
 <template>
+<!-- Floating Description -->
+<!-- Time-Title-Badge -->
+<div>
   <NuxtLink class="flex gap-x-8 w-full" :to="article._path">
-    <FadeInImg width="300" height="160" format="webp" class="rounded-lg aspect-video object-cover" :src="article.banner.src" alt="" :placeholder="[50, 25, 75, 5]" />
     <div class="flex-grow relative py-4">
       <p class="text-2xl font-bold mb-10">{{ article.title }}</p>
       <div class="absolute bottom-4 w-full pr-4 flex justify-between">
@@ -29,4 +29,5 @@ const img = useImage()
       </div>
     </div>
   </NuxtLink>
+</div>
 </template>

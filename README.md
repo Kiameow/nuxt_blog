@@ -12,6 +12,7 @@ try to rebuild my personal blog using nuxt and gsap.
 - [x] new post script.
 - [ ] add draft property to posts.
 - [ ] page performance optimization.(SEO, images)
+- [ ] add google analytics.
 - [ ] add more animations.
 - [ ] responsive design.
 - [ ] add zen mode.
