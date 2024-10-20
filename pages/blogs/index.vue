@@ -3,6 +3,10 @@ import type { ParsedContent } from "@nuxt/content";
 import { debouncedRef } from "@vueuse/core";
 import type { PostCard } from "~/types";
 import { gsap } from 'gsap';
+import { CustomEase } from "gsap/CustomEase";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger,CustomEase);
 
 const { data: articles } = await useAsyncData<PostCard[]>('articles', () => {
   return queryContent('/blogs')
@@ -63,6 +67,42 @@ function clearSearchTerm() {
   searchTerm.value = '';
 }
 
+CustomEase.create("spring-fade-in", ".5, 0, 0, 1");
+
+const triggered = ref(false);
+
+const initAnimation = () => {
+  const articlesToTrigger : gsap.DOMTarget[] = gsap.utils.toArray('.articles-per-year');
+
+  articlesToTrigger.forEach((article) => {
+    gsap.fromTo(article, 
+      { opacity: 0, y: 20 },  // 初始状态：透明度为0，Y位置为20px
+      {
+        opacity: 1,           // 动画结束时透明度为1
+        y: 0,                 // 动画结束时Y位置为0
+        duration: 1.5,        // 动画持续时间
+        ease: "spring-fade-in",   // 使用自定义缓动函数
+        scrollTrigger: {
+          trigger: article,  // 触发动画的元素
+          start: "top center",
+          toggleActions: "play none none none",  // 滚动进入视口时播放动画
+          //markers: true,
+          once: true,
+          toggleClass: "triggered"
+        }
+      }
+    );  
+  })
+}
+
+onMounted(() => {
+  initAnimation();  
+})
+
+watch(filteredArticles, () => {
+  triggered.value = true;
+})
+
 </script>
 
 <template>
@@ -78,14 +118,14 @@ function clearSearchTerm() {
         <BlogSearchBar v-model="searchTerm" @clear-search="clearSearchTerm" />
       </div>
     </div>
-    <div class="flex flex-col gap-y-8 my-10 w-[800px] mx-auto">
+    <div class="flex flex-col gap-y-8 my-10 w-[800px] mx-auto relative" id="articles">
       <!-- <BlogPostCard v-for="article in filteredArticles" :article="article" class="min-h-[160px]" /> -->
-      <div v-for="([year, articlesPerYear], index) in articlesByYear" :key="index" >
-        <span class="font-sans text-[8rem] hollow-text">{{ year }}</span>
-        <dir v-for="article in articlesPerYear" class="flex items-center gap-x-4">
+      <div v-for="([year, articlesPerYear], index) in articlesByYear" :key="index" class="articles-per-year" :class="{ 'triggered': triggered }">
+        <span class="font-sans text-[8rem] hollow-text -ml-8 py-2 block">{{ year }}</span>
+        <div v-for="article in articlesPerYear" class="flex items-center gap-x-4 h-10">
           <span class="w-2 aspect-square rounded-full inline-block bg-black"></span>
           <BlogPostLine :article="article" class="flex-grow"/>
-        </dir>
+        </div>
       </div>
       <div v-if="filteredArticles.length === 0">No Results</div>
     </div>
@@ -96,9 +136,39 @@ function clearSearchTerm() {
 .hollow-text {
   -webkit-text-stroke: 1px rgb(204, 204, 204);
   color: transparent;
+  background-color: white;
 }
 
-.hollow-text-dark {
-
+/* #articles::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background: black;
+  top: 200px;
+  left: 3px;
+  z-index: -1;
 }
+
+#articles::before {
+  height: var(--timeline-height, 0);
+} */
+
+.articles-per-year::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background: black;
+  top: 0;
+  left: 3px;
+  z-index: -1;
+  transition: height 1.2s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.articles-per-year.triggered::before {
+  height: 100%;
+}
+
+
 </style>
