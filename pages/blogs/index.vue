@@ -118,9 +118,9 @@ watch(filteredArticles, () => {
         <BlogSearchBar v-model="searchTerm" @clear-search="clearSearchTerm" />
       </div>
     </div>
-    <div class="flex flex-col gap-y-8 my-10 w-[800px] mx-auto relative" id="articles">
+    <div class="flex flex-col gap-y-8 my-10 w-[800px] mx-auto" id="articles">
       <!-- <BlogPostCard v-for="article in filteredArticles" :article="article" class="min-h-[160px]" /> -->
-      <div v-for="([year, articlesPerYear], index) in articlesByYear" :key="index" class="articles-per-year" :class="{ 'triggered': triggered }">
+      <div v-for="([year, articlesPerYear], index) in articlesByYear" :key="index" class="articles-per-year relative" :class="{ 'triggered': triggered }">
         <span class="font-sans text-[8rem] hollow-text -ml-8 py-2 block">{{ year }}</span>
         <div v-for="article in articlesPerYear" class="flex items-center gap-x-4 h-10">
           <span class="w-2 aspect-square rounded-full inline-block bg-black"></span>
@@ -139,21 +139,6 @@ watch(filteredArticles, () => {
   background-color: white;
 }
 
-/* #articles::before {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 0;
-  background: black;
-  top: 200px;
-  left: 3px;
-  z-index: -1;
-}
-
-#articles::before {
-  height: var(--timeline-height, 0);
-} */
-
 .articles-per-year::before {
   content: '';
   position: absolute;
@@ -163,7 +148,7 @@ watch(filteredArticles, () => {
   top: 0;
   left: 3px;
   z-index: -1;
-  transition: height 1.2s cubic-bezier(0.5, 0, 0, 1);
+  transition: height 2s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .articles-per-year.triggered::before {
