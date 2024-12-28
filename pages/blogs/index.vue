@@ -72,26 +72,32 @@ CustomEase.create("spring-fade-in", ".5, 0, 0, 1");
 const triggered = ref(false);
 
 const initAnimation = () => {
-  const articlesToTrigger : gsap.DOMTarget[] = gsap.utils.toArray('.articles-per-year');
+  const articlesToTrigger: gsap.DOMTarget[] = gsap.utils.toArray('.articles-per-year');
 
-  articlesToTrigger.forEach((article) => {
-    gsap.fromTo(article, 
-      { opacity: 0, y: 20 },  // 初始状态：透明度为0，Y位置为20px
-      {
-        opacity: 1,           // 动画结束时透明度为1
-        y: 0,                 // 动画结束时Y位置为0
-        duration: 1.5,        // 动画持续时间
-        ease: "spring-fade-in",   // 使用自定义缓动函数
-        scrollTrigger: {
-          trigger: article,  // 触发动画的元素
-          start: "top center",
-          toggleActions: "play none none none",  // 滚动进入视口时播放动画
-          //markers: true,
-          once: true,
-          toggleClass: "triggered"
-        }
+  articlesToTrigger.forEach((article, index) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: article,
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true,
+        markers: false
       }
-    );  
+    });
+
+    tl.fromTo(article, 
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        delay: index == 0 ? 0 : 0.8,
+        ease: "spring-fade-in",
+      }
+    ).add(() => {
+      // Add class after the animation completes
+      (article as Element).classList.add('triggered');
+    }, "<+=0.1"); // The "+=0" means it will execute right after the animation finishes
   })
 }
 
