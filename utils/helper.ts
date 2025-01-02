@@ -1,4 +1,6 @@
 import type { Image, PostCard } from "~/types";
+import gsap from "gsap";
+import CustomEase from "gsap/CustomEase";
 
 export function createDefaultImage(): Image {
   return {
@@ -20,5 +22,12 @@ export function createDefaultArticle(): PostCard {
     description: "default description",
     categories: [],
     published: true,
+  }
+}
+
+export const ensureSpringFadeInEase = () => {
+  if (!gsap.parseEase("spring-fade-in")) {
+    gsap.registerPlugin(CustomEase);
+    CustomEase.create("spring-fade-in", ".5, 0, 0, 1");
   }
 }
