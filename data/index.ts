@@ -4,7 +4,7 @@ export const navbarData: { links: LinkItem[] } = {
   links: [
     { text: "主页", link: "/" },
     { text: "博客", link: "/blogs" },
-    { text: "作品集", link: "/portfolio" },
+    { text: "作品集", link: "/#projects" },
     { text: "关于我", link: "/about" },
   ],
 };
@@ -23,45 +23,6 @@ export const aboutMeData: { description: string; avatar: Image } = {
     alt: "Kiameow's avatar",
   },
 };
-
-export const projectData: Project[] = [
-  {
-    name: "Project1",
-    description: "Description1",
-    link: "/",
-    banner: {
-      src: "/images/project1.png",
-      alt: "Project1",
-    },
-  },
-  {
-    name: "Project2",
-    description: "Description2",
-    link: "/",
-    banner: {
-      src: "/images/project1.png",
-      alt: "Project1",
-    },
-  },
-  {
-    name: "Project2",
-    description: "Description2",
-    link: "/",
-    banner: {
-      src: "/images/project1.png",
-      alt: "Project1",
-    },
-  },
-  {
-    name: "Project2",
-    description: "Description2",
-    link: "/",
-    banner: {
-      src: "/images/project1.png",
-      alt: "Project1",
-    },
-  },
-]
 
 export const contactData: { contacts: ContactItem[] } = {
   contacts: [

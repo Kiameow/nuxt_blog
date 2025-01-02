@@ -7,7 +7,6 @@ const { data: article, error } = await useAsyncData(`blog-post-${path}`, () =>
   queryContent().where({ _path: path }).findOne()
 );
 
-// can the article truly be hidden?
 if (error.value || article.value?.published === false) navigateTo("/404");
 
 const data = computed<BlogPost>(() => {
@@ -25,60 +24,60 @@ const data = computed<BlogPost>(() => {
 
 
 
-useHead({
-  title: data.value.title || "",
-  meta: [
-    { name: "description", content: data.value.description },
-    {
-      name: "description",
-      content: data.value.description,
-    },
-    // Test on: https://developers.facebook.com/tools/debug/ or https://socialsharepreview.com/
-    { property: "og:site_name", content: seoData.siteTitle },
-    { hid: "og:type", property: "og:type", content: "website" },
-    {
-      property: "og:url",
-      content: `${seoData.siteURL}/${path}`,
-    },
-    {
-      property: "og:title",
-      content: data.value.title,
-    },
-    {
-      property: "og:description",
-      content: data.value.description,
-    },
-    {
-      property: "og:image",
-      content: data.value.ogImage || data.value.banner.src,
-    },
-    // Test on: https://cards-dev.twitter.com/validator or https://socialsharepreview.com/
-    { name: "twitter:site", content: "@qdnvubp" },
-    { name: "twitter:card", content: "summary_large_image" },
-    {
-      name: "twitter:url",
-      content: `${seoData.siteURL}/${path}`,
-    },
-    {
-      name: "twitter:title",
-      content: data.value.title,
-    },
-    {
-      name: "twitter:description",
-      content: data.value.description,
-    },
-    {
-      name: "twitter:image",
-      content: data.value.ogImage || data.value.banner.src,
-    },
-  ],
-  link: [
-    {
-      rel: "canonical",
-      href: `${seoData.siteURL}/${path}`,
-    },
-  ],
-});
+// useHead({
+//   title: data.value.title || "",
+//   meta: [
+//     { name: "description", content: data.value.description },
+//     {
+//       name: "description",
+//       content: data.value.description,
+//     },
+//     // Test on: https://developers.facebook.com/tools/debug/ or https://socialsharepreview.com/
+//     { property: "og:site_name", content: seoData.siteTitle },
+//     { hid: "og:type", property: "og:type", content: "website" },
+//     {
+//       property: "og:url",
+//       content: `${seoData.siteURL}/${path}`,
+//     },
+//     {
+//       property: "og:title",
+//       content: data.value.title,
+//     },
+//     {
+//       property: "og:description",
+//       content: data.value.description,
+//     },
+//     {
+//       property: "og:image",
+//       content: data.value.ogImage || data.value.banner.src,
+//     },
+//     // Test on: https://cards-dev.twitter.com/validator or https://socialsharepreview.com/
+//     { name: "twitter:site", content: "@qdnvubp" },
+//     { name: "twitter:card", content: "summary_large_image" },
+//     {
+//       name: "twitter:url",
+//       content: `${seoData.siteURL}/${path}`,
+//     },
+//     {
+//       name: "twitter:title",
+//       content: data.value.title,
+//     },
+//     {
+//       name: "twitter:description",
+//       content: data.value.description,
+//     },
+//     {
+//       name: "twitter:image",
+//       content: data.value.ogImage || data.value.banner.src,
+//     },
+//   ],
+//   link: [
+//     {
+//       rel: "canonical",
+//       href: `${seoData.siteURL}/${path}`,
+//     },
+//   ],
+// });
 
 // Generate OG Image
 // defineOgImageComponent("Test", {
