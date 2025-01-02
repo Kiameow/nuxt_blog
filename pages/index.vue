@@ -4,20 +4,18 @@ import {
   aboutMeData,
   contactData,
   introductionData,
-  ownerData,
-  projectData,
+  ownerData
 } from "~/data";
 import type { PostCard } from "~/types";
 import { createDefaultArticle } from "~/utils/helper";
 const blogger = ownerData.name;
 const introduction = introductionData;
 const aboutMe = aboutMeData.description;
-const projects = projectData;
 
 const contacts = contactData.contacts;
 
-const { data }: any = await useAsyncData("latest-five-posts", () => {
-  return queryContent("/blogs")
+const { data: articles } = await useAsyncData("latest-five-posts", () => {
+  return queryContent<PostCard>("/blogs")
     .where({ published: true })
     .sort({ date: -1 })
     .limit(5)
@@ -25,12 +23,13 @@ const { data }: any = await useAsyncData("latest-five-posts", () => {
     .find();
 });
 
-const articles = computed(() => {
-  const temp: PostCard[] = data.value ?? [];
-  while (temp.length < 5) {
-    temp.push(createDefaultArticle());
-  }
-  return temp;
+const { data: projects } = await useAsyncData("latest-five-posts", () => {
+  return queryContent("/projects")
+    .where({ public: true })
+    .sort({ startTime: -1 })
+    .limit(5)
+    .only(getProjectCardKeys())
+    .find();
 });
 
 const blogList = useTemplateRef('blog-list');
@@ -55,7 +54,7 @@ const blogList = useTemplateRef('blog-list');
       
       <div class="middle-part flex flex-col items-center justify-center mx-auto overflow-y-hidden h-4/6 relative">
         <div
-          v-for="(article, index) in articles.slice(0, 5)"
+          v-for="(article, index) in articles?.slice(0, 5)"
           :key="index"
           class="w-4/5 pl-2 mb-4 font-bold border-b relative hovering-effect"
         >
@@ -75,10 +74,13 @@ const blogList = useTemplateRef('blog-list');
       
     </div>
   </div>
-
-  <div id="Portfolio" class="py-20">
-    <HomeLatestPortfolio :projects="projects" />
+  
+  <div id="projects">
+    <div v-for="project in projects">
+      <HomeProjectCard :project-meta="project"></HomeProjectCard>
+    </div>
   </div>
+
   <div id="About" class="px-12 py-10">
     <HomeAbout :about-me="aboutMe" :contacts="contacts" />
   </div>

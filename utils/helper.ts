@@ -1,4 +1,4 @@
-import type { Image, PostCard } from "~/types";
+import type { Image, PostCard, Project } from "~/types";
 
 export function createDefaultImage(): Image {
   return {
@@ -9,6 +9,10 @@ export function createDefaultImage(): Image {
 
 export function getPostCardKeys(): (keyof PostCard)[] {
   return ['_id', '_path', 'categories', 'date', 'description', 'published', 'title'];
+}
+
+export function getProjectCardKeys(): (keyof Project)[] {
+  return ['_id', '_path', 'types', 'startTime', 'endTime', 'public', 'heading', 'intro', 'banner', 'contributors'];
 }
 
 export function createDefaultArticle(): PostCard {
