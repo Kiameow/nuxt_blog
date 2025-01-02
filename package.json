@@ -9,7 +9,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "compose": "node ./utils/createNewPost.mjs"
+    "compose": "node ./utils/createNewPost.mjs",
+    "deploy": "node deploy.cjs"
   },
   "dependencies": {
     "@nuxt/content": "^2.13.2",
