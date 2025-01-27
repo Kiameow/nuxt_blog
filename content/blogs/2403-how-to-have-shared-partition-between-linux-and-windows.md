@@ -34,7 +34,7 @@ Windows的NTFS尽管能被Linux识别，但是需要额外安装和配置NTFS-3G
 2. 准备好空闲分区后，再右击选择新建卷，在其中选择你要划分的大小以及格式（exfat），如果划分的大小小于空闲分区，那么就会把剩余的作为新的空闲分区。
 3. 划分好区域后，记得**记下新划分分区的大小**或将磁盘总览页面拍照记录，后续会用于在Linux中定位新分区。
 
-![Windows磁盘管理界面](2403-00.png)
+![Windows磁盘管理界面](/images/2403-00.png)
 
 ### 2. 在Linux中定位分区设备
 
@@ -46,7 +46,7 @@ sudo fdisk -l
 
 `fdisk -l`命令可以展示本机当中的所有硬盘以及其中的分区信息，并且还会附上如磁盘型号，单元大小，label类型
 
-![fsdisk命令结果](2403-01.png)
+![fsdisk命令结果](/images/2403-01.png)
 可以看到上面的命令结果，根据之前在Windows下记录的磁盘总览，判断`/dev/nvme1n1p3`就是新的共享分区。
 
 ### 3. 在Linux中挂载新分区
@@ -54,7 +54,7 @@ sudo fdisk -l
 
 这里我们采用的挂载方法是编辑`/etc/fstab`文件（用于自动管理系统分区的挂载点，每次系统启动时都会调用它。由于其声明式的特点十分方便易用，新增挂载只需新增一条记录即可。）
 
-![fstab文件内容](2403-03.png)
+![fstab文件内容](/images/2403-03.png)
 
 可以看到fstab中有6列信息，让我分别解释：
 - uuid： 分区的标识符
@@ -70,7 +70,7 @@ sudo fdisk -l
 sudo blkid 分区名
 ```
 
-![blkid获取uuid](2403-04.png)
+![blkid获取uuid](/images/2403-04.png)
 
 `mount point`是自定义的，一般来说，共享分区挂载在`/media`目录下，我选择在`media`目录下新建一个文件夹`shared_data`作为挂载点。
 
@@ -87,12 +87,12 @@ options的详细内容可以参见https://man.archlinux.org/man/mount.8#FILESYST
 UUID=14DB-025E	/media/shared_data  exfat   defaults,noatime,uid=1000,gid=1000,umask=007  0	   2
 ```
 
-![编辑后的fstab文件内容](2403-06.png)
+![编辑后的fstab文件内容](/images/2403-06.png)
 
 在写好fstab后，使用 mount -a即可通知系统对硬盘分区重新根据fstab挂载，有的时候会要求你更新一下系统的状态，因为系统可能还在使用旧版本的fstab, systemctl daemon-reload可以帮你重新加载系统。
 
 挂载好后，查看是否能够正常访问挂载点，一般来讲目录里会有Windows分区后留下的RECYCLE和VolumeInfo文件
-![查看挂载点目录](2403-05.png)
+![查看挂载点目录](/images/2403-05.png)
 
 结束！
 

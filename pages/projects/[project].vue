@@ -1,12 +1,10 @@
 <template>
   <!-- render in markdown  -->
-
-  <template>
     <div class="px-6 py-20 container max-w-5xl mx-auto">
       <!-- Project Header -->
       <div id="project-header" class="space-y-6 mb-12">
         <div class="space-y-4">
-          <div class="flex items-center">
+          <div class="flex items-center space-x-4">
             <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
               {{ data.heading }}
             </h1>
@@ -45,12 +43,11 @@
         <!-- Banner Image -->
         <div
           v-if="data.banner && data.banner.src"
-          class="aspect-video overflow-hidden rounded-xl"
         >
           <img
             :src="data.banner?.src"
             :alt="data.banner?.alt"
-            class="w-full h-full object-cover"
+            class="w-4/5 object-cover rounded-xl mx-auto"
           />
         </div>
       </div>
@@ -94,7 +91,6 @@
         </div>
       </div>
     </div>
-  </template>
 </template>
 
 <script setup lang="ts">
@@ -110,7 +106,6 @@ const { data: project, error } = await useAsyncData(`project-${path}`, () =>
   queryContent().where({ _path: path }).findOne()
 );
 
-console.log(project);
 if (error.value || project.value?.public === false) navigateTo("/404");
 
 const data = computed<Project>(() => {
@@ -147,7 +142,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: "#project-main",
       start: "top center+=100",
-      toggleActions: "play none none reverse",
+      toggleActions: "play none none none",
     },
   });
 });

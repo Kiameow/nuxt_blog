@@ -1,4 +1,5 @@
 <template>
+  <NuxtLink v-if="projectMeta.public" :to="projectMeta._path">
     <article v-if="projectMeta.public" class="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <header>
         <h3 class="text-xl font-medium text-gray-900">{{ projectMeta.heading }}</h3>
@@ -51,6 +52,7 @@
         </div>
       </footer>
     </article>
+  </NuxtLink>
   </template>
   
   <script setup lang="ts">

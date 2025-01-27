@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from "vue";
-import {
-  aboutMeData,
-  contactData,
-  introductionData,
-  ownerData
-} from "~/data";
+import { aboutMeData, contactData, introductionData, ownerData } from "~/data";
 import type { PostCard } from "~/types";
 import { createDefaultArticle } from "~/utils/helper";
 const blogger = ownerData.name;
@@ -23,7 +18,7 @@ const { data: articles } = await useAsyncData("latest-five-posts", () => {
     .find();
 });
 
-const { data: projects } = await useAsyncData("latest-five-posts", () => {
+const { data: projects } = await useAsyncData("all-projects", () => {
   return queryContent("/projects")
     .where({ public: true })
     .sort({ startTime: -1 })
@@ -32,7 +27,78 @@ const { data: projects } = await useAsyncData("latest-five-posts", () => {
     .find();
 });
 
-const blogList = useTemplateRef('blog-list');
+// const numOfProjectColumns = ref(3);
+const windowWidth = ref<number>(0);
+
+const updateWindowSize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  updateWindowSize();
+  window.addEventListener("resize", updateWindowSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWindowSize);
+});
+
+const projectStyleExtraLarge = {
+  numOfColumns: 3,
+  columnWidth: 400,
+  columnPaddings: ["30px", "0px", "60px"]
+};
+
+const projectStyleLarge = {
+  numOfColumns: 3,
+  columnWidth: 300,
+  columnPaddings: ["30px", "0px", "60px"]
+};
+
+const projectStyleMiddle = {
+  numOfColumns: 2,
+  columnWidth: 300,
+  columnPaddings: ["30px", "0px"]
+};
+
+const projectStyleSmall = {
+  numOfColumns: 1,
+  columnWidth: 300,
+  columnPaddings: ["0px"]
+};
+
+const chosenProjectStyle = computed(() => {
+
+  if (windowWidth.value >= 1440) {
+    return projectStyleExtraLarge;
+  } else if (windowWidth.value >= 1024) {
+    return projectStyleLarge;
+  } else if (windowWidth.value >= 768) {
+    return projectStyleMiddle;
+  } else {
+    return projectStyleSmall;
+  }
+})
+
+const columnPaddings = computed(() => {
+  return chosenProjectStyle.value.columnPaddings;
+})
+
+const projectColumns = computed(() => {
+  const temp : any[] = [];
+  for(let i=0; i<chosenProjectStyle.value.numOfColumns; i++) {
+    temp.push([]);
+  }
+  projects.value?.forEach((project, projectIdx) => {
+    let arrIdx = projectIdx % chosenProjectStyle.value.numOfColumns;
+    temp[arrIdx].push(project);
+  });
+
+  return temp;
+})
+const projectClassList = `w-[${chosenProjectStyle.value.columnWidth}px]`;
+
+const blogList = useTemplateRef("blog-list");
 </script>
 
 <template>
@@ -43,16 +109,29 @@ const blogList = useTemplateRef('blog-list');
       :contacts="contacts"
     />
 
-    <MoveDownward class="absolute bottom-0 left-1/2" :element="blogList" :to="0" :invisible-when-leave-bottom="true"/>
+    <MoveDownward
+      class="absolute bottom-0 left-1/2"
+      :element="blogList"
+      :to="0"
+      :invisible-when-leave-bottom="true"
+    />
   </div>
-  
-  <div ref="blog-list" class="relative w-full h-screen p-4 shadow-[inset_0_-4px_6px_rgba(0,0,0,0.2)]">
-    <div id="up-round-fly-into" class="absolute bottom-0 max-w-xl px-4 pt-8 mt-auto mb-0 ml-48 text-white bg-black shadow-xl rounded-t-3xl h-4/5 lg:w-8/12">
+
+  <div
+    ref="blog-list"
+    class="relative w-full h-screen p-4 shadow-[inset_0_-4px_6px_rgba(0,0,0,0.2)]"
+  >
+    <div
+      id="up-round-fly-into"
+      class="absolute bottom-0 max-w-xl px-4 pt-8 mt-auto mb-0 ml-48 text-white bg-black shadow-xl rounded-t-3xl h-4/5 lg:w-8/12"
+    >
       <div class="up-part flex items-center h-1/6">
         <h2 class="ml-4 text-3xl font-bold font-AlexBrush">Recent Posts</h2>
       </div>
-      
-      <div class="middle-part flex flex-col items-center justify-center mx-auto overflow-y-hidden h-4/6 relative">
+
+      <div
+        class="middle-part flex flex-col items-center justify-center mx-auto overflow-y-hidden h-4/6 relative"
+      >
         <div
           v-for="(article, index) in articles?.slice(0, 5)"
           :key="index"
@@ -67,17 +146,25 @@ const blogList = useTemplateRef('blog-list');
       </div>
 
       <div class="bottom-part h-1/6">
-        <NuxtLink to="/blogs" class="font-bold text-[2rem] font-AlexBrush absolute bottom-4 right-8 underline-effect">
+        <NuxtLink
+          to="/blogs"
+          class="font-bold text-[2rem] font-AlexBrush absolute bottom-4 right-8 underline-effect"
+        >
           Read more
         </NuxtLink>
       </div>
-      
     </div>
   </div>
-  
-  <div id="projects">
-    <div v-for="project in projects">
-      <HomeProjectCard :project-meta="project"></HomeProjectCard>
+
+  <div
+    ref="projectsSection"
+    id="projects"
+    class="flex w-5/6 mx-auto gap-4 mt-32 justify-center"
+  >
+    <div v-for="(column, idx) in projectColumns" :style="{ paddingTop: columnPaddings[idx] }">
+      <div v-for="project in column" :class="projectClassList" class="mb-3">
+        <HomeProjectCard :project-meta="project"></HomeProjectCard>
+      </div>
     </div>
   </div>
 
@@ -93,7 +180,7 @@ const blogList = useTemplateRef('blog-list');
 }
 
 .underline-effect::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -122,5 +209,4 @@ const blogList = useTemplateRef('blog-list');
   transform: translateY(-4px);
   color: #0070f3;
 }
-
 </style>
